@@ -4,18 +4,19 @@ import './App.css';
 import Shop from './pages/shop/Shop';
 import Carts from './pages/cart/Carts';
 import Nav from './components/Nav';
+import { ShopContextProvider } from './context/shopContext';
 
 function App() {
   return (
-    <div>
       <Router>
+        <ShopContextProvider>
         <Nav /> 
         <Routes>
           <Route path='/' element={<Shop />} />
           <Route path='/cart' element={<Carts />} />
         </Routes>
+        </ShopContextProvider>
       </Router>
-    </div>
   );
 }
 
