@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { PRODUCTS } from '../../data/products';
-import { shopContext } from '../../context/shopContext';
+import { ShopContext } from '../../context/shopContext';
 import Product from '../shop/product';
 
 const Carts = () => {
-    const {cartItems} = useContext(shopContext);
+    const {cartItems} = useContext(ShopContext);
     return (
         <React.Fragment>
             <h1>Your Cart Items</h1>
