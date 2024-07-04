@@ -1,8 +1,18 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 
 export const useCart = () =>{
-  const [cartItems, setCarItems] = useState([]);
+  const [cartItems, setCarItems] = useState();
+
+  useEffect(()=>{
+    const data = localStorage.getItem("save_product");
+    setCarItems(!!JSON.parse(data) ? JSON.parse(data) : [])
+  },[])
+
+  useEffect(()=>{
+    if(cartItems !== undefined)
+    localStorage.setItem("save_product", JSON.stringify(cartItems))
+  },[cartItems])
 
   const addToCart =(itemId)=>{
     if( !cartItems?.find((item)=> item.id === itemId))
@@ -25,5 +35,10 @@ export const useCart = () =>{
         return i
     }))
   }
-  return{cartItems, addToCart, removeFromCart}
+
+  const resetCart = () => {
+    setCarItems()
+    localStorage.removeItem("save_product");
+  }
+  return{cartItems, addToCart, removeFromCart, resetCart}
 }
